@@ -1,6 +1,7 @@
 package com.bignerdranch.android.beatbox;
 
 import android.databinding.DataBindingUtil;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
+import android.widget.SeekBar;
 
 import com.bignerdranch.android.beatbox.databinding.FragmentBeatBoxBinding;
 import com.bignerdranch.android.beatbox.databinding.ListItemSoundBinding;
@@ -36,12 +38,40 @@ public class BeatBoxFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FragmentBeatBoxBinding binding = DataBindingUtil
+        final FragmentBeatBoxBinding binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_beat_box, container, false);
 
         binding.recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         binding.recyclerView.setAdapter(new SoundAdapter(mBeatBox.getSounds()));
         // binding.setViewModel(new FragmentViewModel(mBeatBox));
+
+
+        binding.seekBarText.setText("Playback Speed: 100%");
+        binding.seekBar.setProgress(binding.seekBar.getMax() / 2);
+        binding.seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                float result;
+                if (progress < seekBar.getMax() / 2) {
+                    result = progress * 0.01f + 0.5f;
+                    mBeatBox.setRate(result);
+                } else {
+                    result = progress * 0.02f;
+                    mBeatBox.setRate(result);
+                }
+                binding.seekBarText.setText("Playback Speed: " + (int)(result * 100) + "%");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         return binding.getRoot();
     }

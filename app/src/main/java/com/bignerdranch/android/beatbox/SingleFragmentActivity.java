@@ -3,10 +3,9 @@ package com.bignerdranch.android.beatbox;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +20,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         return R.layout.activity_fragment;
     }
 
+    MediaPlayer mp;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +32,7 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         FragmentManager manager = getSupportFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragment_container);
 
-        MediaPlayer mp = new MediaPlayer();
-        MediaPlayer.create(this, R.raw.song1_bk);
-        mp.start();
+        playSound();
 
         if (fragment == null) {
             fragment = createFragment();
@@ -42,6 +40,18 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, fragment)
                     .commit();
         }
+    }
+
+    public void playSound() {
+        mp=MediaPlayer.create(getApplicationContext(),R.raw.song1_bk);// the song is a filename which i have pasted inside a folder **raw** created under the **res** folder.//
+        mp.start();
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mp.stop();
+            }
+        }, 5 * 1000);
     }
 
 
