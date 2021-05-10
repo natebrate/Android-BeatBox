@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">BeatBox</string>
+    <string name="playback_label">Playback Speed: {0} %</string>
+    <string name="action_settings">Action Settings</string>
+    <string name="setting">Setting</string>
+    <string name="help">Help</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="light_mode_auto">Light Mode Auto</string>
+    <string name="light_mode_on">Light Mode On</string>
+    <string name="light_mode_off">Light Mode Off</string>
+    <string name="pf_dark_auto"> </string>
+    <string name="pf_light_on"> </string>
+    <string name="pf_light_off"> </string>
+    <string name="pref_night_summary">Themes for app</string>
+
+    <string name="Colorful_Beach">Colorful Beach</string>
+    <string name="Abstract">Abstract</string>
+    <string name="Default">Default</string>
+    <string name="list2_dialog_title">Theme Selected</string>
+</resources>
