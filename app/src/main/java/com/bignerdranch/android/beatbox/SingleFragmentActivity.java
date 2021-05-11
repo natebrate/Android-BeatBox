@@ -73,15 +73,10 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         }*/
 
         switch (item.getItemId()) {
+            //Menu items
             case R.id.setting:
                 Intent i = new Intent(this, SettingActivity.class);
                 startActivity(i);
-            case R.id.help:
-                Intent p = new Intent (this, SettingActivity.class);
-                startActivity(p);
-            case R.id.about:
-                Intent k = new Intent (this, SettingActivity.class);
-                startActivity(k);
             case R.id.exit:
                 finish();
                 System.exit(0);

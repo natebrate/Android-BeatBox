@@ -14,17 +14,22 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //use selected theme
+        /*
+            Design a preference menu, with different theme choices, choose theme on the fly
+            Style and theme your previous Android app
+         */
         SharedPreferences preferences = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
         boolean useDarkTheme = preferences.getBoolean(PREF_DARK_THEME, false);
 
         if(useDarkTheme) {
+            //use selected theme
             setTheme(R.style.DarkTheme);
         }
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
+        //enable toggle and switch between themes
         Switch toggle = (Switch) findViewById(R.id.switch2);
         toggle.setChecked(useDarkTheme);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -35,7 +40,7 @@ public class SettingActivity extends AppCompatActivity {
         });
     }
 
-    //Function to save the theme
+    //Function to save the theme state
     private void toggleTheme(boolean darkTheme) {
         SharedPreferences.Editor editor = getSharedPreferences(PREFS_NAME, MODE_PRIVATE).edit();
         editor.putBoolean(PREF_DARK_THEME, darkTheme);
